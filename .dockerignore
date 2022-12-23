@@ -1,0 +1,8 @@
+.git
+dev
+node_modules
+.gitignore
+Makefile
+Dockerfile
+docker-compose.yml
+nodemon.json

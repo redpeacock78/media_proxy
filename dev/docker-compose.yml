@@ -1,0 +1,12 @@
+version: '3.2'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "yarn dev"
+    volumes:
+      - ../:/app
+    ports:
+      - 3000:3000
