@@ -1,11 +1,9 @@
+import { sharp, axios, express, accessLogger } from "../libs/index.js";
 import {
-  sharp,
-  axios,
-  express,
   imageFileType,
-  accessLogger,
-} from "../libs/index.js";
-import { responseHeader, proxyRequestHeaders } from "../utils/index.js";
+  responseHeader,
+  proxyRequestHeaders,
+} from "../utils/index.js";
 
 const proxy = express.Router();
 
