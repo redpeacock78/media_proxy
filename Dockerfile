@@ -4,6 +4,6 @@ WORKDIR /app
 COPY ./ ./
 
 RUN apk add --update --no-cache yarn && \
-  yarn install --networl-concurrency
+  yarn install --network-concurrency 1
 
 USER node
