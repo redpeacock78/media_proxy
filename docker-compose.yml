@@ -5,6 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: "yarn docker-start"
+    command: "yarn restart-always"
     ports:
       - 3000:3000
