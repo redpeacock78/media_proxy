@@ -1,10 +1,11 @@
 env :=
+opts :=
 
 up:
 ifeq ($(env), develop)
-	@docker-compose -f dev/docker-compose.yml up || exit 0
+	@docker-compose -f dev/docker-compose.yml up $(opts) || exit 0
 else
-	@docker-compose up -d || exit 0
+	@docker-compose up $(opts) || exit 0
 endif
 
 down:
@@ -20,3 +21,13 @@ ifeq ($(env), develop)
 else
 	@docker-compose run app yarn install
 endif
+
+log:
+ifeq ($(env), develop)
+	@docker-compose -f dev/docker-compose.yml logs $(opts) || exit 0
+else
+	@docker-compose logs $(opts) || exit 0
+endif
+
+monit:
+	@docker-compose exec -it app yarn run pm2 monit
