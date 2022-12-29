@@ -20,6 +20,6 @@
   "scripts": {
     "dev": "export NODE_ENV=development && nodemon",
     "start": "NODE_ENV=production node index.js",
-    "docker-start": "export NODE_ENV=production && pm2 start index.js -i 0 --no-daemon"
+    "restart-always": "export NODE_ENV=production && pm2 start --name media-proxy -i 0 --no-daemon --no-color index.js"
   }
 }
