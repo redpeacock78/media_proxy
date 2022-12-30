@@ -1,25 +1,20 @@
-import {
-  figlet,
-  helmet,
-  express,
-  log4js,
-  systemLogger,
-  accessLogger,
-} from "./libs/index.js";
-import { resourceManage } from "./middleware/index.js";
-import { root, proxy } from "./router/index.js";
+import { libs } from "./libs/index.js";
+import { router } from "./router/index.js";
+import { middleware } from "./middleware/index.js";
 
-const app = express();
+const app = libs.express();
 
-app.use(resourceManage);
-app.use(helmet.hsts());
-app.use(helmet.hidePoweredBy());
-app.use(log4js.connectLogger(accessLogger));
+app.use(libs.helmet.hsts());
+app.use(libs.helmet.hidePoweredBy());
+app.use(middleware.resourceManage);
+app.use(libs.log4js.connectLogger(libs.logger.accessLogger));
 
-app.use("/", root);
-app.use("/proxy", proxy);
+app.use("/", router.root);
+app.use("/proxy", router.proxy);
 
 app.listen(3000, () => {
-  console.info(`${figlet.textSync("MediaProxy", { font: "Rectangles" })}\n`);
-  systemLogger.info("Server Start");
+  console.info(
+    `${libs.figlet.textSync("MediaProxy", { font: "Rectangles" })}\n`
+  );
+  libs.logger.systemLogger.info("Server Start");
 });
