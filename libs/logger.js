@@ -1,6 +1,6 @@
-import { log4js } from "./index.js";
+import { log4js } from "./log4js.js";
 
-const systemLogger = log4js.getLogger("[SYSTEM]");
-const accessLogger = log4js.getLogger("[ACCESS]");
-
-export { systemLogger, accessLogger };
+export const logger = {
+  systemLogger: log4js.getLogger("[SYSTEM]"),
+  accessLogger: log4js.getLogger("[ACCESS]"),
+};
