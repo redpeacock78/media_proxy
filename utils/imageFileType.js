@@ -6,15 +6,15 @@ export const imageFileType = (arrayBuffer) => {
   const headerStr = [...Array(10).keys()]
     .map((i) => String.fromCharCode(ba[i]))
     .join("");
-  let fileType = "unknown";
   if (headerHex.indexOf("ffd8") != -1) {
-    fileType = "JPG";
+    return "JPG";
   } else if (headerStr.indexOf("PNG") != -1) {
-    fileType = "PNG";
+    return "PNG";
   } else if (headerStr.indexOf("GIF") != -1) {
-    fileType = "GIF";
+    return "GIF";
   } else if (headerStr.indexOf("BM") != -1) {
-    fileType = "BMP";
+    return "BMP";
+  } else {
+    return "unknown";
   }
-  return fileType;
 };
