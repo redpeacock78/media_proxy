@@ -1,1 +1,5 @@
-export { resourceManage } from "./resourceManage.js";
+import { resourceManage } from "./resourceManage.js";
+
+export const middleware = {
+  resourceManage: resourceManage,
+};
