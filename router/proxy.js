@@ -1,37 +1,35 @@
-import { sharp, axios, express, accessLogger } from "../libs/index.js";
-import {
-  imageFileType,
-  responseHeader,
-  proxyRequestHeaders,
-  validURLStringDecision,
-} from "../utils/index.js";
+import { libs } from "../libs/index.js";
+import { utils } from "../utils/index.js";
 
-const proxy = express.Router();
+const proxy = libs.express.Router();
 
 proxy.get("/", async (req, res) => {
   const url = req.query.url;
-  if (url && validURLStringDecision(url)) {
+  if (url && utils.validURLStringDecision(url)) {
     const config = {
       responseType: "arraybuffer",
-      headers: proxyRequestHeaders(req.headers),
+      headers: utils.proxyRequestHeaders(req.headers),
     };
-    await axios
+    await libs.axios
       .get(url, config)
       .then(async (resp) => {
         const fileName = url.split("/").pop();
         const contentType = resp.headers.getContentType()
           ? resp.headers.getContentType().indexOf("image") === 0
-          : imageFileType(resp.data) !== "unknown";
+          : utils.imageFileType(resp.data) !== "unknown";
         if (contentType) {
-          const webp = sharp(resp.data, { animated: true }).webp().toBuffer();
+          const webp = libs
+            .sharp(resp.data, { animated: true })
+            .webp()
+            .toBuffer();
           const convFileName = `${fileName.split(".")[0]}.webp`;
-          accessLogger.debug("Suucessfully compressed images!");
+          libs.logger.accessLogger.debug("Suucessfully compressed images!");
           res
-            .set(responseHeader({ fileName: convFileName }))
+            .set(utils.responseHeader({ fileName: convFileName }))
             .type("webp")
             .send(await webp);
         } else {
-          accessLogger.debug(
+          libs.logger.accessLogger.debug(
             "Successfully accessed content og unknown content type."
           );
           res.redirect(301, decodeURI(url));
@@ -39,17 +37,17 @@ proxy.get("/", async (req, res) => {
       })
       .catch((e) => {
         if (e.response) {
-          accessLogger.error(
+          libs.logger.accessLogger.error(
             `Request failed with status code ${e.response.status}`
           );
           res.status(e.response.status).send();
         } else {
-          accessLogger.error(`Request failed with status code 500`);
+          libs.logger.accessLogger.error(`Request failed with status code 500`);
           res.status(500).send();
         }
       });
   } else {
-    accessLogger.error("Bad Request");
+    libs.logger.accessLogger.error("Bad Request");
     res.status(500).send("Bad Request");
   }
 });

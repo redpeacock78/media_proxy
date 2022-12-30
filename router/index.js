@@ -1,2 +1,7 @@
-export { root } from "./root.js";
-export { proxy } from "./proxy.js";
+import { root } from "./root.js";
+import { proxy } from "./proxy.js";
+
+export const router = {
+  root: root,
+  proxy: proxy,
+};

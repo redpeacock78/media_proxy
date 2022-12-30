@@ -1,9 +1,9 @@
-import { express, accessLogger } from "../libs/index.js";
+import { libs } from "../libs/index.js";
 
-const root = express.Router();
+const root = libs.express.Router();
 
 root.get("/", (req, res) => {
-  accessLogger.error("Bad Request");
+  libs.logger.accessLogger.error("Bad Request");
   res.status(500).send("Bad Request");
 });
 
