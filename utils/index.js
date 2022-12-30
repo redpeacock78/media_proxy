@@ -1,11 +1,8 @@
-import { imageFileType } from "./imageFileType.js";
-import { responseHeader } from "./responseHeader.js";
-import { proxyRequestHeaders } from "./proxyRequestHeaders.js";
-import { validURLStringDecision } from "./validURLStringDecision.js";
-
 export const utils = {
-  imageFileType: imageFileType,
-  responseHeader: responseHeader,
-  proxyRequestHeaders: proxyRequestHeaders,
-  validURLStringDecision: validURLStringDecision,
+  imageFileType: (await import("./imageFileType.js")).imageFileType,
+  responseHeader: (await import("./responseHeader.js")).responseHeader,
+  proxyRequestHeaders: (await import("./proxyRequestHeaders.js"))
+    .proxyRequestHeaders,
+  validURLStringDecision: (await import("./validURLStringDecision.js"))
+    .validURLStringDecision,
 };
