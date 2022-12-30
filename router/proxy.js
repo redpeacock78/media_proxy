@@ -3,13 +3,14 @@ import {
   imageFileType,
   responseHeader,
   proxyRequestHeaders,
+  validURLStringDecision,
 } from "../utils/index.js";
 
 const proxy = express.Router();
 
 proxy.get("/", async (req, res) => {
   const url = req.query.url;
-  if (url) {
+  if (url && validURLStringDecision(url)) {
     const config = {
       responseType: "arraybuffer",
       headers: proxyRequestHeaders(req.headers),
