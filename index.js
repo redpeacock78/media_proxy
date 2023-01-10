@@ -6,6 +6,7 @@ const app = libs.express();
 
 app.use(libs.helmet.hsts());
 app.use(libs.helmet.hidePoweredBy());
+app.use(middleware.cors);
 app.use(middleware.resourceManage);
 app.use(libs.log4js.connectLogger(libs.logger.accessLogger));
 
