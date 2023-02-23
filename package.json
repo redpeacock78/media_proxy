@@ -18,7 +18,7 @@
     "pm2-intercom": "^1.0.0"
   },
   "scripts": {
-    "dev": "export NODE_ENV=development && nodemon",
+    "dev": "export NODE_ENV=development && export PORT=3000 && nodemon",
     "start": "NODE_ENV=production node index.js",
     "restart-always": "export NODE_ENV=production && pm2 start --name media-proxy -i 0 --no-daemon --no-color index.js"
   }
