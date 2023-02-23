@@ -19,7 +19,7 @@ proxy.get("/", async (req, res) => {
           : utils.imageFileType(resp.data) !== "unknown";
         if (contentType) {
           const webp = libs
-            .sharp(resp.data, { animated: true })
+            .sharp(resp.data, { animated: true, quality: 50 })
             .webp()
             .toBuffer();
           const convFileName = `${fileName.split(".")[0]}.webp`;
