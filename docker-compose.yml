@@ -5,6 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: "yarn restart-always"
+    command: "export PORT=3000 && yarn restart-always"
     ports:
       - 3000:3000
