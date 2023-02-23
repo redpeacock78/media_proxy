@@ -13,7 +13,7 @@ app.use(libs.log4js.connectLogger(libs.logger.accessLogger));
 app.use("/", router.root);
 app.use("/proxy", router.proxy);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.info(
     `${libs.figlet.textSync("MediaProxy", { font: "Rectangles" })}\n`
   );
