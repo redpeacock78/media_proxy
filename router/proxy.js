@@ -19,15 +19,19 @@ proxy.get("/", async (req, res) => {
           : utils.imageFileType(resp.data) !== "unknown";
         if (contentType) {
           const webp = libs
-            .sharp(resp.data, { animated: true, quality: 50 })
+            .sharp(resp.data, {
+              animated: true,
+              quality: 50,
+              failOnError: false,
+            })
             .webp()
             .toBuffer();
           const convFileName = `${fileName.split(".")[0]}.webp`;
-          libs.logger.accessLogger.debug("Suucessfully compressed images!");
           res
             .set(utils.responseHeader({ fileName: convFileName }))
             .type("webp")
             .send(await webp);
+          libs.logger.accessLogger.debug("Suucessfully compressed images!");
         } else {
           libs.logger.accessLogger.debug(
             "Successfully accessed content og unknown content type."
