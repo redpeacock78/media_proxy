@@ -21,7 +21,7 @@ proxy.get("/", async (req, res) => {
           const webp = libs
             .sharp(resp.data, {
               animated: true,
-              quality: 50,
+              quality: 30,
               failOnError: false,
             })
             .webp()
