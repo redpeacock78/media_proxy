@@ -11,6 +11,7 @@ app.use(middleware.resourceManage);
 app.use(libs.log4js.connectLogger(libs.logger.accessLogger));
 
 app.use("/", router.root);
+app.use("/ping", router.ping);
 app.use("/proxy", router.proxy);
 
 app.listen(process.env.PORT, () => {
