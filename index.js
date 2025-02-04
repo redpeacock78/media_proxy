@@ -1,6 +1,10 @@
+import { Client } from "appwrite";
 import { libs } from "./libs/index.js";
 import { router } from "./router/index.js";
 import { middleware } from "./middleware/index.js";
+
+const client = new Client();
+client.setProject(process.env.APPWRITE_PROJECT_ID);
 
 const app = libs.express();
 
